@@ -22,6 +22,13 @@
 		<link rel="stylesheet" href="css/chartbuilder.css" type="text/css" media="screen" charset="utf-8">
 		<link rel="stylesheet" href="css/gneisschart.css" type="text/css" media="screen" charset="utf-8">
 		<link rel="stylesheet" href="css/colorPicker.css" type="text/css" media="screen" charset="utf-8">
+		
+		<!-- Tabs -->
+		<link rel="stylesheet" href="bower_components/tabs/tabs.css" type="text/css" media="screen" charset="utf-8">
+		
+		<!-- Grid -->
+		<link rel="stylesheet" href="bower_components/grid-editor/handsontable.css" type="text/css" media="screen" charset="utf-8">
+		
 	</head>
 	<body>
 		<!-- Add your site or application content here -->
@@ -42,14 +49,27 @@
 			    <h1>ChartBuilder</h1>
 			  
   				<div id="chartOptions" class="interfaceCol">
-             <div id="datainput">
-             	<div class="inputGroup">
-                <h2>1. Input your data</h2>
+  				<ul class="tabs">
+  					<li><a href="#datainputgrid">Data</a></li>
+   					<li style="display:none;"><a href="#datainputcontainer" >Raw</a></li>
+   					<li><a href="#formattedbox">Formatted</a></li>
+   					<li><a href="#htmlbox">HTML</a></li>
+				</ul>
+             <div id="datainput" class="tabContainer">
+             <div id="datainputgrid" class="inputGroup tabContent">
+             	<span id="invalidDataSpanGrid" class="hide">Warning: Data is Invalid</span>
+             	<span id="loadingbox" >Loading...</span>
+             	<div id="dataTableGrid">
+             		
+             	</div>
+             </div>
+             	<div id="datainputcontainer" class="inputGroup tabContent">
+                	<h2>Input your data</h2>
                 <span id="invalidDataSpan" class="hide">Warning: Data is Invalid</span>
                 <textarea id="csvInput" class="input-box" name="csvInput" rows="8"></textarea>
              	</div>
-             	<div class="inputGroup">
-             		<h4>Check the format of your data</h4>
+             	
+             	<div id="formattedbox" class="inputGroup tabContent">
                 <div id="dataTable" class="input-box">
                   <table border=0>
                     <tr><th>Header</th></tr>
@@ -57,6 +77,12 @@
                   </table>
               	</div>
              	</div>
+             	
+             	<div id="htmlbox" class="inputGroup tabContent">
+             		<h4>Copy the HTML table of your data (if you want)</h4>
+              		<textarea  class="input-box"  id="table-html" type="text" rows="10"></textarea>
+             	</div>
+             	
              	<div class="clearfix"></div>
             </div>
 
@@ -67,9 +93,19 @@
   					
   					<div class="optionBlock">
     					<h2>3. Chart Options</h2>
-    						<div class="optionGroup"><label for="chart_title">Title</label><input type="text" name="chart_title" value="" id="chart_title"></div>
-    						<div class="optionGroup"><label for="credit">Credit</label><input id="creditLine" type="text" name="credit" value="Made with Chartbuilder"></div>
-    						<div class="optionGroup"><label for="source">Source</label><input id="sourceLine" type="text" name="source" value="Data: ">
+    						<div class="optionGroup">
+    							<label for="chart_title">Title</label>
+    							<input type="text" name="chart_title" value="" id="chart_title">
+    						</div>
+    						<div class="optionGroup">
+    							<label for="credit">Credit</label>
+    							<input id="creditLine" type="text" name="credit" value="Made with Chartbuilder">
+    						
+    						</div>
+    						<div class="optionGroup">
+    						<label for="source">Source</label>
+    						<input id="sourceLine" type="text" name="source" value="Data: ">
+    						
     						<cite>Something like "Data: Bureau of Labor Statistics" or "Data compiled by Factset"</cite></div>
     				</div>
     				<div class="optionBlock">
@@ -143,8 +179,7 @@
               </div>
             </div>
             <div class="optionBlock full">
-              <h4>5. Copy the HTML table of your data (if you want)</h4>
-              <textarea  class="input-box"  id="table-html" type="text" rows="10"></textarea>
+              
               
               <div class="previousCharts hide">
                 <div class="optionGroup"><label for="previous_charts">Previously Created Charts</label>
@@ -169,10 +204,11 @@
 		<script src="bower_components/canvg/canvg.js" charset="utf-8"></script>
 		<script src="bower_components/rgbcolor/index.js" charset="utf-8"></script>
 		<script src="bower_components/jquery-csv/index.js" charset="utf-8"></script>
-		<script src="bower_components/really-simple-color-picker/jquery.colorPicker.min.js" charset="utf-8"></script>
+		<script src="bower_components/really-simple-color-picker/jquery.colorPicker.js" charset="utf-8"></script>
 		<script src="bower_components/webfontloader/target/webfont.js" type="text/javascript" charset="utf-8"></script>
-		
-		
+		<script src="bower_components/tabs/tabs.js" type="text/javascript" charset="utf-8"></script>
+		<script src="bower_components/grid-editor/handsontable.js" type="text/javascript" charset="utf-8"></script>
+		<script src="bower_components/grid-editor/init.js" type="text/javascript" charset="utf-8"></script>
 		
 		<!-- Custom libraries JS -->
 		<script src="js/custom_components/sugar-1.3.9-custom.min.js" charset="utf-8"></script>
@@ -185,17 +221,14 @@
 		<script src="js/vendor/rgbcolor.js" charset="utf-8"></script>
 		
 		<script type="text/javascript">
-
+		$(document).ready(function() {
+		            ChartBuilder.start();
+		});
 		//This loads the webfonts and starts Chartbuilder once they're present
 		WebFont.load({
 			custom: {
 				families: ["Cutive"]
-			},
-		    active: function(name) {
-		        $(document).ready(function() {
-		            ChartBuilder.start();
-		        });
-		    }
+			}
 		});
 		</script>
 	</body>

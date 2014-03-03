@@ -9,7 +9,7 @@ div.colorPicker-picker {
 }
 
 div.colorPicker-palette {
-  width: 220px;
+  width: 500px;
   position: absolute;
   border: 1px solid #598FEF;
   background-color: #EFEFEF;
@@ -21,8 +21,8 @@ div.colorPicker-palette {
   div.colorPicker_hexWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
 
 div.colorPicker-swatch {
-  height: 25px;
-  width: 25px;
+  height: 18px;
+  width: 18px;
   margin: 1px;
   float: left;
   cursor: pointer;
